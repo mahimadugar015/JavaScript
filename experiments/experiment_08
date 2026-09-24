@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gym Admission Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            width: 450px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #3730a3;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        .success {
+            color: green;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🏋️ Shreya's Gym Admission Form</h2>
+
+    <form id="gymForm">
+
+        <!-- NAME -->
+        <label>Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+        <div id="nameError" class="error"></div>
+
+
+        <!-- MOBILE -->
+        <label>Mobile Number:</label>
+        <input type="text" id="mobile"
+               placeholder="Enter 10-digit mobile number"
+               maxlength="10">
+
+        <div id="mobileMessage" class="error"></div>
+
+
+        <!-- EMAIL -->
+        <label>Email:</label>
+        <input type="text" id="email"
+               placeholder="Enter your email">
+
+        <div id="emailMessage" class="error"></div>
+
+
+        <!-- AGE -->
+        <label>Age:</label>
+        <input type="number" id="age"
+               placeholder="Enter age (16-80)">
+
+        <div id="ageMessage" class="error"></div>
+
+
+        <!-- MEMBERSHIP -->
+        <label>Membership Plan:</label>
+
+        <select id="plan">
+            <option value="">Select a plan</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Yearly">Yearly</option>
+        </select>
+
+        <div id="planMessage" class="error"></div>
+
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <div id="message"></div>
+
+</div>
+
+
+<script>
+
+    let mobile = document.getElementById("mobile");
+    let email = document.getElementById("email");
+    let age = document.getElementById("age");
+    let plan = document.getElementById("plan");
+    let form = document.getElementById("gymForm");
+
+
+    // MOBILE LIVE VALIDATION
+    mobile.addEventListener("input", function() {
+
+        this.value = this.value.replace(/[^0-9]/g, "");
+
+        if (this.value.length < 10) {
+
+            document.getElementById("mobileMessage").innerHTML =
+                "Enter 10 digits";
+
+        } else {
+
+            document.getElementById("mobileMessage").className = "success";
+
+            document.getElementById("mobileMessage").innerHTML =
+                "✓ Valid mobile number";
+        }
+    });
+
+
+    // EMAIL LIVE VALIDATION
+    email.addEventListener("input", function() {
+
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailPattern.test(this.value)) {
+
+            document.getElementById("emailMessage").className = "success";
+
+            document.getElementById("emailMessage").innerHTML =
+                "✓ Valid email";
+
+        } else {
+
+            document.getElementById("emailMessage").className = "error";
+
+            document.getElementById("emailMessage").innerHTML =
+                "Enter a valid email";
+        }
+    });
+
+
+    // AGE LIVE VALIDATION
+    age.addEventListener("input", function() {
+
+        let value = Number(this.value);
+
+        if (value < 16 || value > 80) {
+
+            document.getElementById("ageMessage").className = "error";
+
+            document.getElementById("ageMessage").innerHTML =
+                "Age must be between 16 and 80";
+
+        } else {
+
+            document.getElementById("ageMessage").className = "success";
+
+            document.getElementById("ageMessage").innerHTML =
+                "✓ Valid age";
+        }
+    });
+
+
+    // MEMBERSHIP LIVE VALIDATION
+    plan.addEventListener("change", function() {
+
+        if (this.value === "") {
+
+            document.getElementById("planMessage").innerHTML =
+                "Please select a membership plan";
+
+        } else {
+
+            document.getElementById("planMessage").className = "success";
+
+            document.getElementById("planMessage").innerHTML =
+                "✓ " + this.value + " plan selected";
+        }
+    });
+
+
+    // FORM SUBMISSION
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name = document.getElementById("name").value.trim();
+
+        let mobileValue = mobile.value;
+        let emailValue = email.value;
+        let ageValue = Number(age.value);
+        let planValue = plan.value;
+
+        if (
+            name !== "" &&
+            mobileValue.length === 10 &&
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue) &&
+            ageValue >= 16 &&
+            ageValue <= 80 &&
+            planValue !== ""
+        ) {
+
+            document.getElementById("message").innerHTML =
+                "✅ Registration Successful! Welcome, " + name + "!";
+
+            form.reset();
+
+        } else {
+
+            document.getElementById("message").innerHTML =
+                "❌ Please enter all details correctly.";
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
