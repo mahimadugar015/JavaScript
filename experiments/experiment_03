@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grading System</title>
+</head>
+
+<body style="background-color:rgb(205, 176, 230);">
+
+    <h1>Shreya's 1196 Grading System</h1>
+    <label>Enter Marks:</label><br><br>
+    <input type="text" id="marks" placeholder="Enter Marks here"><br><br>
+
+    <button onclick="calculateGrade()">Submit</button>
+    <h2 id="result"></h2>
+    <script>
+
+        function calculateGrade()
+        {
+            let marks = document.getElementById("marks").value;
+
+            // Form Validation
+            if(marks == "")
+            {
+                alert("Enter Marks");
+                return;
+            }
+
+            marks = Number(marks);
+
+            if(marks < 0 || marks > 100)
+            {
+                alert("Enter Valid Marks between 0 and 100");
+                return;
+            }
+
+            let grade;
+
+            if(marks >= 90)
+                grade = "A+";
+            else if(marks >= 75)
+                grade = "A";
+            else if(marks >= 65)
+                grade = "B+";
+            else if(marks >= 55)
+                grade = "B";
+            else if(marks >= 45)
+                grade = "C+";
+            else if(marks >= 35)
+                grade = "C";
+            else if(marks >= 25)
+                grade = "D";
+            else
+                grade = "FAIL";
+
+            document.getElementById("result").innerHTML =
+                "Marks: " + marks + "<br>Grade: " + grade;
+        }
+    </script>
+</body>
+</html>
