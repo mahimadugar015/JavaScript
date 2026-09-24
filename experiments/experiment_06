@@ -1,0 +1,19 @@
+let text="Contact us at shreyamaske15@gmail.com or shreya.maske.batch2024@sitnagpur.siu.edu.in . Welcome to our website!";
+let email="student@email.com";
+let emailregex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+console.log("Valid email:", emailregex.test(email)); // Output: true
+
+let emails=text.match(/[^\s@]+@[^\s@]+\.[^\s@]+/g);
+console.log("Extracted emails:", emails); 
+
+console.log("Uppercase:", text.toUpperCase());
+console.log("Lowercase:", text.toLowerCase());
+console.log("Length of text:", text.length);
+console.log("Contains 'Welcome':", text.includes("Welcome"));
+
+let words=text.split(/\s+/);
+console.log("Words in text:", words);
+
+let count=(text.match(/email/gi) || []).length;
+console.log("Count of 'email' in text:", count);
