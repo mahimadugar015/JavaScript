@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Billing Calculator</title>
+    </head>
+
+    <body style="background-color: powderblue;">
+        <h1>Shreya's Billing Calculator</h1>
+
+        <script>
+            const GST= 0.18;
+            var custname= prompt("Enter Customer Name : ");
+            var productname= prompt("Enter Product Name : ");
+            var quantity= Number(prompt("Enter Quantity : "));
+            var price= Number(prompt("Enter Price per Item : "));
+
+            let total= quantity * price;
+            let gstamt= total * GST;
+            let finalbill= total + gstamt;
+
+            //object
+            const bill= {
+                customer: custname,
+                product: productname,
+                quantity,
+                price,
+                total,
+                gstamt,
+                finalbill};
+            
+            const {
+                customer,
+                product,
+                gstamt: gst,
+                finalbill: amount
+            } = bill;
+
+            document.write(`<h3>Billing Reciept</h3>`);
+            document.write(`<p>Customer: ${customer}</p>`);
+            document.write(`<p>Product: ${product}</p>`);
+            document.write(`<p>Quantity: ${quantity}</p>`);
+            document.write(`<p>Price per item: ${price}</p>`);
+            document.write(`<p>Total: ₹${total}</p>`);
+            document.write(`<p>GST (18%): ₹${gst.toFixed(2)}</p>`);
+            document.write(`<h3>Final Bill: ₹${amount.toFixed(2)}</h3>`);
+
+        </script>
+    </body>
+</html>
