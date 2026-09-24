@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM PIN Verification</title>
+</head>
+<body style="background-color: rgb(233, 166, 58);">
+<h2 >Shreya's (1196) ATM PIN Verification System</h2>
+Enter ATM PIN:
+<input type="text" id="pin">
+<button onclick="verifyPIN()">Verify PIN</button> <hr>
+<div id="output"></div>
+<script src="shreya1196case4.js"></script>
+</body>
+</html>
+
+
+
+// anonymous function to display welcome message
+
+let welcome = function(){
+    console.log("===========================================");
+    console.log("Shreya's 1196 Palindrome Checker Program");
+    console.log("===========================================");
+};
+welcome();
+
+//global variable
+let language ="JavaScript"; 
+function scopeDemo(){ 
+    let topic = "Functions"; 
+    console.log("Language: " + language); 
+    console.log("Topic: " + topic); }
+scopeDemo();
+
+
+// closure to maintain count of function calls
+function counter(){
+    let count = 0;
+    return function(){
+        count++;
+        console.log("Count: " + count);
+    };
+}
+
+let c=counter();
+c();
+c();
+
+function palindromeChecker(str){
+    let reversedStr = str.split("").reverse().join("");
+    return str===reversedStr;
+}
+
+
+//arrow function to display message
+const display = (message) => {
+    console.log(message);
+};
+
+try{
+    let input = 1221;
+    if(typeof input !== "string"){
+        throw " Input must be a string.";
+    }
+    if(palindromeChecker(input)){
+        display(input + " is a palindrome.")
+    }
+    else{
+        display(input + " is not a palindrome.");
+    }
+}
+
+catch(error){
+    console.log("Error: " + error);
+}
