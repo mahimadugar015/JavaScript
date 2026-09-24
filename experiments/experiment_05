@@ -1,0 +1,44 @@
+const prompt = require("prompt-sync")();
+let n = parseInt(prompt("Enter number of items:"));
+
+let cart = [];
+
+for(let i = 0; i < n; i++){
+    let name = prompt("Enter item name:");
+    let price = parseFloat(prompt("Enter price:"));
+    let quantity = parseInt(prompt("Enter quantity:"));
+
+    cart.push({
+        name: name,
+        price: price,
+        quantity: quantity
+    });
+}
+
+let total = cart.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
+}, 0);
+
+let discountPercent = Math.floor(total / 1000) * 10;
+
+if(discountPercent > 100){
+    discountPercent = 100;
+}
+
+let discount = total * (discountPercent / 100);
+let finalAmount = total - discount;
+
+cart.forEach(item => {
+    console.log(
+        item.name +
+        " | Price: " + item.price +
+        " | Qty: " + item.quantity
+    );
+});
+
+console.log("================================");
+console.log("SHREYA'S (1196) CART CALCULATOR");
+console.log("================================");
+console.log("Total: " + total);
+console.log("Discount: " + discount);
+console.log("Final Amount: " + finalAmount);
